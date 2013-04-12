@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="pt-br" ng-app> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>Iniciando com Node.js</title>
+  
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="foundation/stylesheets/foundation.min.css">
+  <link rel="stylesheet" href="foundation/stylesheets/app.css">
+  <link rel="stylesheet" href="resources/css/style.css">
+
+  <script src="foundation/javascripts/modernizr.foundation.js"></script>
+
+  <!-- Included JS Files (Compressed) -->
+  <script src="foundation/javascripts/jquery.js"></script>
+  <script src="foundation/javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="foundation/javascripts/app.js"></script>
+  <script src="socket.io-client.min.js"></script>
+
+  <script src="resources/js/chat.js"></script>
+
+
+</head>
+<body>
+  
+
+<div class="contain-to-grid">
+    <nav class="top-bar">
+      <ul>
+        <li class="name"><h1><a href="#">Node.js</a></h1></li>
+        <li class="toggle-topbar"><a href="#"></a></li>
+      </ul>
+
+
+      <section>
+        <ul class="right">
+          <li><a href="http://github.com/brunoew/nodechat">Página do projeto no GitHub</a></li>
+          <li><a href="http://nodejs.org">Node.js</a></li>
+          <li><a href="https://github.com/LearnBoost/socket.io-client">Socket.io client</a></li>
+          <li><a href="https://github.com/LearnBoost/socket.io">Socket.io server</a></li>
+        </ul>
+      </section>
+
+    </nav>
+  </div>
+
+
+
+  <div class="row" id="auth">
+    <div class="twelve columns panel">
+      <form action="">
+        <div class="row">
+          <div class="five columns">
+            <label for="nome">Seu nome:</label>
+            <input type="text" name="nome" id="nome" required placeholder="Seu nome">
+          </div>
+
+          <div class="five columns">
+            <label for="email">Email:</label>
+            <input type="text" name="email" id="email" required placeholder="email@email.com">
+          </div>
+
+          <div class="two columns end">
+              <label for="">&nbsp;</label>
+              <input type="submit" class="button small" value="Entrar">
+          </div>
+        </div> 
+      </form>
+    </div>
+  </div>
+
+
+
+  <div class="row twelve columns" id="chat" style="display:none;">
+  
+
+    <div class="row panel ">
+
+        <!-- Area das mensagens -->
+        <div class="ten columns panel areaAuto radius white" id="msgArea">
+          <ul class="messagesOne"></ul>
+        </div>
+
+        <!-- Area dos usuarios -->
+        <div class="two columns panel end areaAuto callout" id="userArea">
+          <ul class="list">
+          </ul>
+        </div>
+
+    </div>
+
+
+    <div class="row panel">
+      <form action="">
+        <div class="row">
+            <input type="text" name="msg" id="msg" placeholder="Digite sua mensagem...">
+        </div>
+
+        <div class="row">
+            <input type="submit" value="Enviar..." class="button" >
+        </div>
+      </form>
+    </div>
+
+
+
+  </div>
+  
+</body>
+</html>
