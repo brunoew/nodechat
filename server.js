@@ -6,11 +6,22 @@ app.listen(8084)
 //Variáveis globais
 var users = []
 var dadosUsuarios = []
+var messages = [] //Armazena as mensagens em um array (persiste os dados)
 
 function handler (req, res) {
     res.writeHead(200)
-    res.end("Servidor criado")
+    res.end()
 }
+
+
+var storageMessages = function(usuario, msg){
+    messages.push({usuario: usuario, msg: msg});
+    if(messages.length > 10){
+        messages.shift();
+    }
+}
+
+
 
 io.sockets.on('connection', function (socket) {
   var dados = null
@@ -27,12 +38,19 @@ io.sockets.on('connection', function (socket) {
         
         if(users[i].id != socket.id)
           socket.emit('online', dadosUsuarios[users[i].id])
+        else{
+            //Envia o historico de msgs
+            messages.forEach(function(m){
+                socket.emit('receive', {usuario: m.usuario, msg: m.msg});
+             });
+        }
       }
   })
 
   socket.on('receive', function (data) { //ao receber uma mensagem, notifica atualiza o chat de todos os usuarios
     for(i in users){
       users[i].emit('receive', {usuario: dados, msg: data.msg})
+      storageMessages(dados, data.msg);
     }
   })
 

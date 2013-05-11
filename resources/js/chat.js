@@ -1,4 +1,4 @@
-var socket = io.connect('http://192.168.25.11:8084');
+var socket = io.connect('http://localhost:8084');
 
 socket.on('connect', function(){
     console.log('usuario conectado');
@@ -11,7 +11,8 @@ socket.on('receive', function(data){
 });
 
 socket.on('online', function(usuario){
-    $("#userArea ul").append("<li id='"+usuario.socket+"'>"+usuario.dados.nome+" <small>("+usuario.dados.email+")</small></li>");
+    $("#userArea ul").append("<li id='"+usuario.socket+"'><img id='_img-"+usuario.socket+"'> <p>"+usuario.dados.nome+"</p> <div class='clear'></div></li>");
+    $('#_img-'+usuario.socket).attr('src', 'http://www.gravatar.com/avatar/' + md5(usuario.dados.email)+'?s=36&d=mm');
 });
 
 socket.on('offline', function(dados){
@@ -25,7 +26,7 @@ socket.on('receive', function(data){
     var date = new Date();
 
     $("#msgArea ul").append('<li class="'+by+'">'+
-                          '<a><img alt="usuario" src="resources/img/chat_user.png"></a>'+
+                          '<a><img alt="usuario" src="http://www.gravatar.com/avatar/' + md5(data.usuario.dados.email)+'?s=36&d=mm"></a>'+
                           '<div class="messageArea">'+
                           '<span class="aro"></span>'+
                             '<div class="infoRow">'+
@@ -54,6 +55,8 @@ $(function(){
 
     $("#chat form").bind('submit', function(e){
         e.preventDefault();
+        if($.trim($("#msg").val()) == "" ) 
+            return; 
         socket.emit('receive', {msg: $("#msg").val()} );
         $("#msg").val("").focus();
     });
